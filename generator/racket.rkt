@@ -2,20 +2,20 @@
 
 (require
   racket/file
-  "path.rkt"
+  "util/date.rkt"
+  "util/path.rkt"
+  "util/file.rkt"
   "generate-project-input.rkt"
 )
 
 (define (generate-project input)
-  (define target-path (get-full-path input))
+  (define target-path (get-full-path (generate-project-input-path input)))
   (define data (generate-project-input-data input))
 
-  (displayln (current-directory))
-
-  ; (displayln data)
+  (displayln (format "Generating project at: ~a" target-path))
   
-  (when (directory-exists? target-path)
-    (delete-directory/files target-path))
+  ; (when (directory-exists? target-path)
+  ;   (delete-directory/files target-path))
 
   (make-directory* target-path)
   
@@ -24,7 +24,7 @@
 )
 
 (define (process-dir path items)
-  (make-directory* path)
+  (recreate-dir path)
   (for-each (lambda (item) (process-item path item)) items))
 
 (define (process-item parent-path item)
@@ -43,14 +43,15 @@
     [else
      (error "Unknown item type: " item-type)]))
 
+(define timestamp (get-timestamp))
+
 (define input
   (generate-project-input
-    ; "../output"
-    "/home/mrzli/projects/other/racket/rkt-generate-project/output"
-    #f
-    '(
+    "./output"
+    ; "/home/mrzli/projects/other/racket/rkt-generate-project/output"
+    `(
       dir
-      "example"
+      ,(format "example_~a" timestamp)
       (
         (text "file.txt" "This is an example file.")
         (dir

@@ -3,7 +3,7 @@
 (require
   racket/contract
   racket/path
-  "path-contracts.rkt"
+  "util/path-contracts.rkt"
 )
 
 (provide
@@ -11,13 +11,13 @@
     (struct generate-project-input
       (
         [path path-like?]
-        [is-relative? boolean?]
         [data any/c]
       ))))
 
 (struct generate-project-input
-  (path is-relative? data)
-  #:transparent)
+  (path data)
+  #:transparent
+)
 
 ;      [data data/c])]))
 
