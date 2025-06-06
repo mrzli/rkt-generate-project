@@ -10,12 +10,13 @@
   (contract-out
     (struct generate-project-input
       (
-        [path path-like?]
+        [target-path path-like?]
+        [source-path path-like?]
         [data any/c]
       ))))
 
 (struct generate-project-input
-  (path data)
+  (target-path source-path data)
   #:transparent
 )
 
