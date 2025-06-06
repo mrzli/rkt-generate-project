@@ -26,20 +26,22 @@
 )
 
 (define (process-item parent-path source-path item)
-  (define item-type (car item))
-  (define item-name (cadr item))
-  (define item-content (caddr item))
-
-  (define full-path (build-path parent-path item-name))
-
-  (cond
-    [(eq? item-type 'dir)
-     (process-dir full-path source-path item-content)]
-    [(eq? item-type 'text)
-     (with-output-to-file full-path
-      (lambda () (display item-content)) #:exists 'replace)]
-    [else
-     (error "Unknown item type: " item-type)]))
+  (match item
+    [`(dir ,name ,content)
+     (process-dir (build-path parent-path name) source-path content)]
+    [`(text ,name ,content)
+     (with-output-to-file
+      (build-path parent-path name)
+      (lambda () (display content)) #:exists 'replace)]
+    [`(copy ,name ,source-path-relative)
+      (let (
+          [source-full-path (build-path source-path source-path-relative)]
+          [target-full-path (build-path parent-path name)])
+        (unless (file-exists? source-full-path)
+          (error "Source file does not exist:" source-full-path))
+        (copy-file source-full-path target-full-path))]
+    [other
+     (error "Unknown data structure:" other)]))
 
 (define (process-dir path source-path items)
   (recreate-dir path)
@@ -57,7 +59,7 @@
       ,(format "example_~a" timestamp)
       (
         (text "file.txt" "This is an example file.")
-        ; (copy "example.txt" "from-source.txt")
+        (copy "target.txt" "example.txt")
         (dir
           "subdir"
           ((text "subfile.txt" "This is a subfile in a subdirectory."))
