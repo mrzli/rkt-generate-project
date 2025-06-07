@@ -41,7 +41,7 @@
           (error "Source file does not exist:" source-full-path))
         (copy-file source-full-path target-full-path))]
     [other
-     (error "Unknown data structure:" other)]))
+      (error "Unknown data structure:" other)]))
 
 (define (process-dir path source-path items)
   (recreate-dir path)
@@ -49,23 +49,27 @@
 
 (define timestamp (get-timestamp))
 
+(define data
+  `(
+    dir
+    ,(format "example_~a" timestamp)
+    (
+      (text "file.txt" "This is an example file.")
+      (copy "target.txt" "example.txt")
+      (dir
+        "subdir"
+        ((text "subfile.txt" "This is a subfile in a subdirectory."))
+      )
+    )
+  )
+)
+
 (define input
   (generate-project-input
     "./output"
     "./source"
     ; "/home/mrzli/projects/other/racket/rkt-generate-project/output"
-    `(
-      dir
-      ,(format "example_~a" timestamp)
-      (
-        (text "file.txt" "This is an example file.")
-        (copy "target.txt" "example.txt")
-        (dir
-          "subdir"
-          ((text "subfile.txt" "This is a subfile in a subdirectory."))
-        )
-      )
-    )
+    data
   )
 )
 
