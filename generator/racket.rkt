@@ -7,6 +7,7 @@
   "util/path.rkt"
   "util/file.rkt"
   "generate-project-input.rkt"
+  "npm/npm.rkt"
 )
 
 (define (generate-project input)
@@ -74,3 +75,7 @@
 )
 
 (generate-project input)
+
+(define version (get-npm-package-version "nx"))
+
+version
