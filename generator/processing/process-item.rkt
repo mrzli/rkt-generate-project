@@ -4,6 +4,7 @@
   racket/match
   racket/contract
   "../util/file.rkt"
+  "process-delete.rkt"
 )
 
 (provide
@@ -27,6 +28,8 @@
         (unless (file-exists? source-full-path)
           (error "Source file does not exist:" source-full-path))
         (copy-file source-full-path target-full-path))]
+    [`(delete ,pattern)
+      (process-delete parent-path pattern)]
     [other
       (error "Unknown data structure:" other)]))
 

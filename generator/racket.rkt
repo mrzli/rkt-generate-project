@@ -38,6 +38,10 @@
         "subdir"
         ((text "subfile.txt" "This is a subfile in a subdirectory."))
       )
+      (delete "file.txt")
+      (delete (#px"^2tar"))
+      ;(delete #rx"to-delete\\.txt")
+      ;(delete (#rx"to-delete\\.txt"))
     )
   )
 )
@@ -56,3 +60,7 @@
 (define version (get-npm-package-version "nx"))
 
 version
+
+(define regex `(#rx"bla"))
+
+regex
