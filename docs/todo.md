@@ -18,3 +18,7 @@
   - Preserve:
     - `node_modules\`
     - `pnpm-lock.yaml`
+
+
+- deletion
+  - accept string, list of strings, regex, or list of regexes
