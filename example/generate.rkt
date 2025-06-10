@@ -4,8 +4,8 @@
   racket/file
   "../util/path.rkt"
   "../util/date.rkt"
+  "../generator/fs-input.rkt"
   "../generator/generate-fs.rkt"
-  "../generator/generate-fs-input.rkt"
 )
 
 (define timestamp (get-timestamp))
@@ -33,7 +33,7 @@
 )
 
 (define input
-  (generate-fs-input
+  (fs-input
     "./output"
     "./source"
     ; "/home/mrzli/projects/other/racket/rkt-generate-project/output"

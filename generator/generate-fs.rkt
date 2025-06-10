@@ -5,23 +5,23 @@
   racket/contract
   "../util/path.rkt"
   "processing/process-item.rkt"
-  "generate-fs-input.rkt"
+  "fs-input.rkt"
 )
 
 (provide
   (contract-out
-    (generate-fs (-> generate-fs-input? void?))
+    (generate-fs (-> fs-input? void?))
   )
 )
 
 (define (generate-fs input)
-  (define target-path (get-full-path (generate-fs-input-target-path input)))
-  (define source-path (get-full-path (generate-fs-input-source-path input)))
-  (define data (generate-fs-input-data input))
+  (define target (get-full-path (fs-input-target input)))
+  (define source (get-full-path (fs-input-source input)))
+  (define data (fs-input-data input))
 
-  (displayln (format "Generating file system entries at: ~a" target-path))
+  (displayln (format "Generating file system entries at: ~a" target))
 
-  (make-directory* target-path)
+  (make-directory* target)
   
-  (process-item target-path source-path data)
+  (process-item target source data)
 )

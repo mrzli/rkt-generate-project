@@ -8,15 +8,15 @@
 
 (provide
   (contract-out
-    (struct generate-fs-input
+    (struct fs-input
       (
-        [target-path path-like?]
-        [source-path path-like?]
+        [target path-like?]
+        [source path-like?]
         [data any/c]
       ))))
 
-(struct generate-fs-input
-  (target-path source-path data)
+(struct fs-input
+  (target source data)
   #:transparent
 )
 
