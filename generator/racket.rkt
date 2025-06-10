@@ -15,13 +15,9 @@
   (define data (generate-project-input-data input))
 
   (displayln (format "Generating project at: ~a" target-path))
-  
-  ; (when (directory-exists? target-path)
-  ;   (delete-directory/files target-path))
 
   (make-directory* target-path)
   
-  ; Process the project structure
   (process-item target-path source-path data)
 )
 
