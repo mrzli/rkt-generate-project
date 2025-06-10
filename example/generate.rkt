@@ -2,8 +2,8 @@
 
 (require
   racket/file
-  "../generator/util/path.rkt"
-  "../generator/util/date.rkt"
+  "../util/path.rkt"
+  "../util/date.rkt"
   "../generator/generate-fs.rkt"
   "../generator/generate-fs-input.rkt"
 )

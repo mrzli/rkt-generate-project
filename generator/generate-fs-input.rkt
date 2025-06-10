@@ -3,7 +3,7 @@
 (require
   racket/contract
   racket/path
-  "util/path-contracts.rkt"
+  "../util/path-contracts.rkt"
 )
 
 (provide

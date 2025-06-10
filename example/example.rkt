@@ -1,7 +1,7 @@
 #lang racket/base
 
 (require
-  "../generator/npm/npm.rkt"
+  "../project/npm.rkt"
 )
 
 (define version (get-npm-package-version "nx"))

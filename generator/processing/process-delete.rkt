@@ -1,9 +1,7 @@
 #lang racket/base
 
 (require
-  racket/match
   racket/contract
-  "../util/file.rkt"
 )
 
 (provide

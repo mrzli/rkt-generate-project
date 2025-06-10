@@ -3,7 +3,7 @@
 (require
   racket/file
   racket/contract
-  "util/path.rkt"
+  "../util/path.rkt"
   "processing/process-item.rkt"
   "generate-fs-input.rkt"
 )
