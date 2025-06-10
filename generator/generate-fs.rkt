@@ -6,15 +6,15 @@
   "util/path.rkt"
   "npm/npm.rkt"
   "processing/process-item.rkt"
-  "generate-project-input.rkt"
+  "generate-fs-input.rkt"
 )
 
-(define (generate-project input)
-  (define target-path (get-full-path (generate-project-input-target-path input)))
-  (define source-path (get-full-path (generate-project-input-source-path input)))
-  (define data (generate-project-input-data input))
+(define (generate-fs input)
+  (define target-path (get-full-path (generate-fs-input-target-path input)))
+  (define source-path (get-full-path (generate-fs-input-source-path input)))
+  (define data (generate-fs-input-data input))
 
-  (displayln (format "Generating project at: ~a" target-path))
+  (displayln (format "Generating file system entries at: ~a" target-path))
 
   (make-directory* target-path)
   
@@ -46,7 +46,7 @@
 )
 
 (define input
-  (generate-project-input
+  (generate-fs-input
     "./output"
     "./source"
     ; "/home/mrzli/projects/other/racket/rkt-generate-project/output"
@@ -60,7 +60,7 @@
   (get-full-path (build-path "./output" root-name))
 )
 
-(generate-project input)
+(generate-fs input)
 
 (define version (get-npm-package-version "nx"))
 

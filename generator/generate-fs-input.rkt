@@ -8,14 +8,14 @@
 
 (provide
   (contract-out
-    (struct generate-project-input
+    (struct generate-fs-input
       (
         [target-path path-like?]
         [source-path path-like?]
         [data any/c]
       ))))
 
-(struct generate-project-input
+(struct generate-fs-input
   (target-path source-path data)
   #:transparent
 )
@@ -31,6 +31,6 @@
 ;      (list/c 'text string? string?)))))
 
 ; ;; Define the structure
-; (struct generate-project-input
+; (struct generate-fs-input
 ;   (path is-relative? data)
 ;   #:transparent)
