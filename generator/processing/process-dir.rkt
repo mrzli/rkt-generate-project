@@ -24,13 +24,6 @@
 )
 
 (define (process-dir process-item path source-path items overwrite-strategy)
-  (displayln
-    (format
-      "Processing directory: ~a, ~a, ~a"
-      path
-      overwrite-strategy
-      (directory-exists? path)
-    ))
   (when (directory-exists? path)
     (match overwrite-strategy
       ['replace (delete-directory/files path)]

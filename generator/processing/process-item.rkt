@@ -6,6 +6,7 @@
   racket/contract
   "process-dir.rkt"
   "process-text.rkt"
+  "process-copy.rkt"
   "process-delete.rkt"
 )
 
@@ -24,12 +25,10 @@
     [`(text ,name ,content ,overwrite-strategy)
       (process-text (build-path parent-path name) content overwrite-strategy)]
     [`(copy ,name ,source-path-relative ,overwrite-strategy)
-      (let (
-          [source-full-path (build-path source-path source-path-relative)]
-          [target-full-path (build-path parent-path name)])
-        (unless (file-exists? source-full-path)
-          (error "Source file does not exist:" source-full-path))
-        (copy-file source-full-path target-full-path))]
+      (process-copy
+        (build-path source-path source-path-relative)
+        (build-path parent-path name)
+        overwrite-strategy)]
     [`(delete ,pattern)
       (process-delete parent-path pattern)]
     [other
