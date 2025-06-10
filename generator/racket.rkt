@@ -26,11 +26,12 @@
 )
 
 (define timestamp (get-timestamp))
+(define root-name (format "example_~a" timestamp))
 
 (define data
   `(
     dir
-    ,(format "example_~a" timestamp)
+    ,root-name
     (
       (text "file.txt" "This is an example file.")
       (copy "target.txt" "example.txt")
@@ -43,6 +44,7 @@
       ;(delete #rx"to-delete\\.txt")
       ;(delete (#rx"to-delete\\.txt"))
     )
+    replace
   )
 )
 
@@ -53,6 +55,12 @@
     ; "/home/mrzli/projects/other/racket/rkt-generate-project/output"
     data
   )
+)
+
+; copy "./source/source" dir as root-name inside "./output" for testing
+(copy-directory/files
+  (get-full-path "./source/source")
+  (get-full-path (build-path "./output" root-name))
 )
 
 (generate-project input)
