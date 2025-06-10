@@ -34,7 +34,8 @@
     ,root-name
     (
       (text "file.txt" "This is an example file.")
-      (copy "target.txt" "example.txt")
+      (text "file2.txt" "This is an example file 2." keep)
+      (copy "target.txt" "example.txt" keep)
       (dir
         "subdir"
         ((text "subfile.txt" "This is a subfile in a subdirectory."))
