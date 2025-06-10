@@ -5,6 +5,7 @@
   racket/file
   racket/contract
   "process-dir.rkt"
+  "process-text.rkt"
   "process-delete.rkt"
 )
 
@@ -21,9 +22,7 @@
     [`(dir ,name ,content ,overwrite-strategy)
       (process-dir process-item (build-path parent-path name) source-path content overwrite-strategy)]
     [`(text ,name ,content ,overwrite-strategy)
-      (with-output-to-file
-        (build-path parent-path name)
-        (lambda () (display content)) #:exists 'replace)]
+      (process-text (build-path parent-path name) content overwrite-strategy)]
     [`(copy ,name ,source-path-relative ,overwrite-strategy)
       (let (
           [source-full-path (build-path source-path source-path-relative)]
