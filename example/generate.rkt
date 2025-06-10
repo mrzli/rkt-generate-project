@@ -3,10 +3,9 @@
 (require
   racket/file
   "../generator/util/path.rkt"
+  "../generator/util/date.rkt"
   "../generator/generate-fs.rkt"
   "../generator/generate-fs-input.rkt"
-  "../generator/util/date.rkt"
-  "../generator/npm/npm.rkt"
 )
 
 (define timestamp (get-timestamp))
@@ -49,11 +48,3 @@
 )
 
 (generate-fs input)
-
-(define version (get-npm-package-version "nx"))
-
-version
-
-(define regex `(#rx"bla"))
-
-regex
