@@ -6,6 +6,7 @@
   "../util/date.rkt"
   "../generator/fs-input.rkt"
   "../generator/generate-fs.rkt"
+  "../project/convert-fs.rkt"
 )
 
 (define timestamp (get-timestamp))
@@ -23,6 +24,16 @@
         "subdir"
         ((text "subfile.txt" "This is a subfile in a subdirectory."))
       )
+      (json
+        "json-example.json"
+        #hash(
+          (object . #hash((key . "value")))
+          ("array" . ("item1" 42 #t null))
+          (string . "Hello, World!")
+          (number . 3.14)
+          (boolean . #t)
+          (null . null))
+      )
       ;(delete "file.txt")
       ;(delete (#px"^2tar"))
       ;(delete #rx"to-delete\\.txt")
@@ -37,7 +48,7 @@
     "./output"
     "./source"
     ; "/home/mrzli/projects/other/racket/rkt-generate-project/output"
-    data
+    (convert-fs data)
   )
 )
 
